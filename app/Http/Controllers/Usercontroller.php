@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class Usercontroller extends Controller
 {
@@ -24,7 +25,6 @@ class Usercontroller extends Controller
         } else {
             return redirect('/');
         }
-
     }
 
     public function login(Request $request) {
@@ -33,14 +33,31 @@ class Usercontroller extends Controller
             'loginpassword' => 'required'
         ]);
 
-        if (auth()->attempt(['name' => $incoming_field['loginname'], 'password' => $incoming_field['loginpassword']])) {
-            $request->session()->regenerate();
+        $user = User::where('name', $incoming_field['loginname'])->first();
 
-            return redirect()->route('panel');
-        } else {
-            return redirect('/');
+        if (!$user) {
+            return back()->withErrors(['loginname' => 'The provided username does not exist.']);
         }
-        
-        
+
+        if (!auth()->attempt(['name' => $incoming_field['loginname'], 'password' => $incoming_field['loginpassword']])) {
+            return back()->withErrors(['loginpassword' => 'The provided password is incorrect.']);
+        }
+
+        $request->session()->regenerate();
+        return redirect()->route('panel');
+    }
+
+    public function logout(Request $request) {
+        $user = Auth::user();
+      
+    
+        $user->update([
+            'logout_at' => now()
+        ]);
+
+        auth()->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/login');
     }
 }

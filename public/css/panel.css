@@ -1,0 +1,116 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+.header {
+     position: relative;
+     top: 0;
+     left: 0;
+     width: 100%;
+     padding: 20px 100px; 
+     background: transparent;
+     display: flex;
+     justify-content: space-between; 
+     align-items: center;
+     z-index: 100;
+} 
+
+#logo {
+    position: relative;
+    right: 35px;
+    height: 40px;
+    width: 155px;
+    background-color: transparent;
+    border: none;
+    font-size: 32px;
+    font-weight: bold;
+    padding: 2px;
+}
+
+.navbar a {
+    position: relative;
+    font-size: 18px;
+    color: black;
+    font-weight: 500;
+    text-decoration: none;
+    margin-left: 35px;
+}
+
+.navbar a::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background: black;
+    transition: .3s;
+}
+
+.navbar a:hover::before {
+    width: 100%;
+}
+
+
+.sidebar {
+    position: fixed;
+    top: 10%;
+    left: -250px; 
+    height: 100%;
+    width: 230px;
+    background-color: #555;
+    padding: 20px 40px;
+    transition: left 0.3s;
+}
+.sidebar nav ul {
+    color: black;
+}
+
+.sidebar nav ul > li:hover {
+    color: white;
+}
+
+.sidebar nav a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+
+
+.sidebar nav ul li:last-child {
+    position: absolute;
+    top: 81%;
+    left: 61%;
+    width: 100%;
+    list-style-type: none;
+    border: none;
+}
+
+.sidebar nav ul li:last-child button {
+    transition: color 2s;
+    transition: background-color 0.4s;
+    height: 60px;
+    width: 60px;
+    border-radius: 50px;
+    font-size: 16px;
+    border: none;
+    background-color: #555;
+    color: #007bff;
+
+    
+}
+
+.sidebar nav ul li:last-child button:hover{ 
+    background-color: #abaaa9;
+}
+
+
+
+
+

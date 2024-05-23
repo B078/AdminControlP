@@ -18,3 +18,4 @@ Route::get('/panel', function() {
 
 Route::post('/register', [Usercontroller::class, 'register']);
 Route::post('/login', [Usercontroller::class, 'login']);
+Route::post('/logout', [Usercontroller::class, 'logout']);
